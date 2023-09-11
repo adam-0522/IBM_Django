@@ -21,6 +21,18 @@
         </div>
       </div>
     </div>
+    {% else %}
+    <div class="rightalign">
+      <div class="dropdown">
+        <form action="{% url 'onlinecourse:registration' %}" method="get">
+          <input class="dropbtn" type="submit" value="Visitor" />
+          <div class="dropdown-content">
+            <a href="{% url 'onlinecourse:registration' %}">Signup</a>
+            <a href="{% url 'onlinecourse:login' %}">Login</a>
+          </div>
+        </form>
+      </div>
+    </div>
     {% endif %}
     <h2>Popular courses list</h2>
     <hr />
