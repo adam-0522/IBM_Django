@@ -27,6 +27,24 @@ class EnrollView(View):
         course.total_enrollment += 1
         course.save()
         return HttpResponseRedirect(reverse(viewname='onlinecourse:course_details', args=(course.id,)))
+
+class CourseDetailsView(View):
+
+    # Handles get request
+    def get(self, request, *args, **kwargs):
+        context = {}
+        # We get URL parameter pk from keyword argument list as course_id
+        course_id = kwargs.get('pk')
+        try:
+            course = Course.objects.get(pk=course_id)
+            context['course'] = course
+            return render(request, "onlinecourse/course_detail.html", context)
+            #<HINT> Get the course object based on course_id
+            #<HINT> Append the course object to context
+            #<HINT> Use render method to return a HTTP response with template
+        except Course.DoesNotExist:
+            raise Http404("No course matches the given id.")
+
 # Function based views
 
 # Function-based course list view
